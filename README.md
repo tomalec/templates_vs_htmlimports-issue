@@ -1,7 +1,10 @@
 templates_vs_htmlimports-issue
 ==============================
 
-Polymer, Google Canary, or Juicy/imported-tempalte issue
+Issues:
+ - [Chromium#389566](https://code.google.com/p/chromium/issues/detail?id=389566),
+ - [Polymer#554](https://github.com/Polymer/polymer/issues/554),
+ - [Juicy/imported-tempalte#52](https://github.com/Juicy/imported-tempalte/issues/82)
 
 It appears that when I use custom element that performs dynamic HTML Import (just adds tag to the `<head>`)within another custom element `<my-element>`  which is inside `<template>` with Polymer Binding, `<my-element>`s `.offsetWidth` gets corrupted even if read on `domReady` callback.
 
