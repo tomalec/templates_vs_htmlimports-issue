@@ -12,8 +12,15 @@ https://github.com/Juicy/imported-template
         link.rel = "import";
         link.href = "components/whatever.html";
         // add it to the head
-        // this is a problem
-        document.head.appendChild(link);
+        // There is a bug in Chromium:
+        // https://github.com/Polymer/polymer/issues/554#issuecomment-47359848
+        // https://code.google.com/p/chromium/issues/detail?id=389566
+        // so we could try to workaround it by removing this dynamic import from attaching flow:
+        setTimeout( function asyncImport(){
+            document.head.appendChild(link);
+        });
+        // It is not ideal solution, as probably we could later be trapped 
+        // with measuring between link insertion and finished loading
     };
 
     document.register('dynamic-import', {
