@@ -1,0 +1,37 @@
+<!-- Import Polymer -->
+<!-- <link rel="import" href="/vendor/polymer/polymer.html"> -->
+
+<!-- https://github.com/Juicy/juicy-tile-list -->
+<polymer-element name="my-element">
+    <template>
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+            }
+        </style>
+        My offsetWidth on `domReady` was : {{width}}, after 200ms it is: {{resizedWidth}}.
+        <content></content>
+    </template>
+    <script>
+    Polymer('my-element', ( {
+        domReady: function domReady(){
+            var that = this;
+            // force it with inline style - still won't help
+            this.style.width = "100%";
+            this.style.display = "block";
+
+            //check offsetWidth on domReady
+            console.warn("offsetWidth, at domReady:", this.offsetWidth," for me:", this);
+            this.width = (this).offsetWidth;
+
+            // check after 200ms
+            setTimeout( function(){
+                console.info("offsetWidth, after 200ms:", that.offsetWidth," for me:", that);
+                that.resizedWidth = that.offsetWidth;
+            }, 200);
+        }
+     }) 
+    );
+    </script>
+</polymer-element>

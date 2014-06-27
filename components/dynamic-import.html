@@ -1,0 +1,23 @@
+<!--
+https://github.com/Juicy/imported-template
+-->
+<!-- <link rel="import" href="../polymer/polymer.html"> -->
+<script>
+  (function () {
+    var DynamicImportPrototype = Object.create( HTMLElement.prototype);
+
+    DynamicImportPrototype.attachedCallback = function () {
+        // create new link tag
+        var link = document.createElement('link');
+        link.rel = "import";
+        link.href = "components/whatever.html";
+        // add it to the head
+        // this is a problem
+        document.head.appendChild(link);
+    };
+
+    document.register('dynamic-import', {
+      prototype: DynamicImportPrototype
+    });   
+  })();
+</script>

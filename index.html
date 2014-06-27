@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <title>Template vs. HTML Import issue</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/polymer/0.3.3/platform.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/polymer/0.3.3/polymer.js"></script>
+    
+    <link rel="import" href="components/dynamic-import.html">
+    <link rel="import" href="components/my-element.html">
+
+    <style>
+        juicy-tile-list{
+            width: 100%;
+            display: block;
+        }
+     </style>
+
+</head>
+
+<body>
+  <template id="root" bind>
+      <my-element>
+          <dynamic-import></dynamic-import>
+      </my-element>
+  </template>
+
+
+  <div style="width:100%;" id="emptyDiv"></div>
+  <script>
+  var div = document.getElementById("emptyDiv");
+  console.log("empty div", div, " with `width: 100%;` should have have offset width = ", div.offsetWidth );
+
+  console.info("but when we nest it a bit with templates and polymer-elements..")
+    document.addEventListener("polymer-ready", function polymerReady(){
+      var rootTemplate = document.getElementById("root");
+        rootTemplate.model = {};
+    });
+  </script>
+</body>
+</html>
